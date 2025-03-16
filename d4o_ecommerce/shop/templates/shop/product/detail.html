@@ -17,7 +17,7 @@
         <p class="price">PLN{{ product.price}}</p>
         <form action="{% url "cart:product_add" product.id %}" method="post">
             {{ cart_product_form }}
-            {% csrf token %}
+            {% csrf_token %}
             <input type="submit" value="Add to cart">
         </form>
         {{ product.description|linebreaks }}
