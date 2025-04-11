@@ -1,1 +1,2 @@
 pip install -r requirements.txt
+gevent~=24.11.1
