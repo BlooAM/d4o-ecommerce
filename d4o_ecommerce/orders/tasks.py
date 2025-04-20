@@ -11,5 +11,6 @@ def order_created(order_id):
     message = f'Hello {order.first_name}, \n\n' \
               'You have created order in our shop. ' \
               f'Identifier of the order: {order.id}'
-    mail_sent = send_mail(subject, message, 'admin@d4_ecommerce.com', [order.email])
+    print(message)
+    mail_sent = send_mail(subject, message, 'admin@mail.com', [order.email])
     return mail_sent
