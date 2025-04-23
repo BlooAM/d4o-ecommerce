@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.conf import settings
 
 from .models import OrderItem
 from .forms import OrderCreateForm
@@ -21,7 +22,11 @@ def order_create(request):
                     quantity=item['quantity'],
                 )
             cart.clear()
-            order_created.delay(order.id)
+            if settings.USE_CELERY:
+                order_created.delay(order.id)
+            else:
+                order_created(order.id)
+
             request.session['order_id'] = order.id
             return redirect(reverse('payment:process'))
     else:
