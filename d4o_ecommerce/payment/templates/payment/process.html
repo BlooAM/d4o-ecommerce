@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "shop/base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}Pay for the order{% endblock %}
+
+{% block content %}
+    <h1>Order summary</h1>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+                <tr class="row{% cycle "1" "2" %}">
+                    <td>
+                        <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static "img/no_img.png" %}{% endif %}">
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
